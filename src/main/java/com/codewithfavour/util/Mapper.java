@@ -40,20 +40,23 @@ public class Mapper {
         userRegisterResponse.setEmail(user.getEmail());
         userRegisterResponse.setPhoneNumber(user.getPhoneNumber());
         userRegisterResponse.setId(user.getId());
-        userRegisterResponse.setMessage("Register successful");
+        userRegisterResponse.setMessage("Registered successfully");
         return userRegisterResponse;
     }
 
     public UserLoginResponse mapToLogin(UserLoginRequest request){
         UserLoginResponse userLoginResponse = new UserLoginResponse();
-        User user = userRepository.findByPhoneNumber(request.getPhoneNumber());
+        User user = userRepository.findByEmail(request.getEmail());
 
-        if(!user.validPassword(request.getPassword())) throw new RuntimeException ("Invalid password");
-        else{
-            userLoginResponse.setMessage("Login successful");
-        }
+        if (user == null) throw new RuntimeException("User not found");
+
+        if (!user.validPassword(request.getPassword())) throw new RuntimeException("Invalid password");
+
+
+        userLoginResponse.setMessage("Login successfully");
         return userLoginResponse;
     }
+
 
     public Contact addContact(AddContactRequest addContactRequest) {
         User user = userRepository.findById(addContactRequest.getUserId())

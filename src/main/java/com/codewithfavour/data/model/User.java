@@ -3,6 +3,7 @@ package com.codewithfavour.data.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Data;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     private String id;
     private String fullName;
+    @Indexed(unique = true)
     private String email;
     private String phoneNumber;
     @Getter(AccessLevel.NONE)
