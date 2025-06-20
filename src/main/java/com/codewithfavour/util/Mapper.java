@@ -74,7 +74,7 @@ public class Mapper {
     public AddContactResponse mapToAddContact(Contact contact) {
         AddContactResponse response = new AddContactResponse();
         response.setId(contact.getId());
-        response.setMessage("Add contact successful");
+        response.setMessage("contact added successfully");
         return response;
     }
 
